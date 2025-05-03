@@ -1,4 +1,4 @@
-.PHONY: init up down
+.PHONY: init up down alembic_upgrade_head
 
 init:
 	@uv venv .venv
@@ -9,3 +9,6 @@ up:
 
 down:
 	@docker compose down
+
+alembic_upgrade_head:
+	cd backend && alembic upgrade head
