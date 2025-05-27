@@ -24,7 +24,6 @@ def upgrade() -> None:
         'category',
         sa.Column('id', sa.BigInteger, primary_key=True, autoincrement=True),
         sa.Column('name', sa.VARCHAR(100), nullable=False),
-        sa.Column('description', sa.VARCHAR(300), nullable=True),
         sa.Column("timestamp", sa.TIMESTAMP, server_default=sa.func.now())
     )
     

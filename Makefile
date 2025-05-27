@@ -1,4 +1,4 @@
-.PHONY: init up down alembic_upgrade_head
+.PHONY: init up down alembic_upgrade_head format
 
 init:
 	@uv venv .venv
@@ -12,3 +12,7 @@ down:
 
 alembic_upgrade_head:
 	cd backend && alembic upgrade head
+
+format:
+	@ruff format
+	@ruff check --fix
