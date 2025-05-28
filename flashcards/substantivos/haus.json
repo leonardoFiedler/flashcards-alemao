@@ -1,0 +1,9 @@
+{
+    "tipo": "substantivo",
+    "alemao": "Haus",
+    "portugues": "casa",
+    "artigo": "das",
+    "plural": "Häuser",
+    "opcoes_plural": ["Hause", "Hauser", "Hausen"],
+    "dica": "Palavra que remete a algo ligado ao lar"
+}

@@ -8,6 +8,7 @@ dependencies = [
     "alembic>=1.15.2",
     "fastapi[standard]>=0.115.12",
     "psycopg2-binary>=2.9.10",
+    "ruff>=0.11.8",
     "sqlalchemy>=2.0.40",
 ]
 
@@ -15,3 +16,11 @@ dependencies = [
 dev = [
     "ruff>=0.11.8",
 ]
+
+[tool.ruff]
+target-version = "py312"
+exclude = [
+    "alembic",
+    ".venv",
+]
+
