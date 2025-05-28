@@ -1,14 +1,18 @@
 from pydantic import BaseModel
 
 
-class CreateCategory(BaseModel):
+class Message(BaseModel):
+    message: str
+
+
+class CreateCategorySchema(BaseModel):
     name: str
 
 
-class CategoryPublic(CreateCategory):
+class CategoryPublicSchema(CreateCategorySchema):
     id: int
 
 
-class CategoriesPublic(BaseModel):
-    data: list[CategoryPublic]
+class CategoriesPublicSchema(BaseModel):
+    data: list[CategoryPublicSchema]
     count: int

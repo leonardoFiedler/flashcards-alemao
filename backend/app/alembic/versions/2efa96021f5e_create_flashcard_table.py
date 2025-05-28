@@ -20,6 +20,9 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     """Upgrade schema."""
+    
+    # Name of the category. It can be custom or based on a context
+    # z.b. house words, basic verbs...
     op.create_table(
         'category',
         sa.Column('id', sa.BigInteger, primary_key=True, autoincrement=True),
@@ -27,6 +30,7 @@ def upgrade() -> None:
         sa.Column("timestamp", sa.TIMESTAMP, server_default=sa.func.now())
     )
     
+    # Word type actual: Verbs and Nouns
     op.create_table(
         'word_type',
         sa.Column('id', sa.BigInteger, primary_key=True, autoincrement=True),

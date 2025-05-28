@@ -5,27 +5,33 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import func
 from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, registry
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 
 
-class Base(DeclarativeBase):
+table_registry = registry()
+
+
+class RecordNotFoundException(Exception):
     pass
 
 
-class Category(Base):
+@table_registry.mapped_as_dataclass
+class Category:
     __tablename__ = "category"
 
-    id = mapped_column(Integer, primary_key=True)
+    id: Mapped[int] = mapped_column(init=False, primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
-    timestamp: Mapped[datetime] = mapped_column(insert_default=func.now())
+    timestamp: Mapped[datetime] = mapped_column(init=False, insert_default=func.now())
 
-    flashcards: Mapped[List["Flashcard"]] = relationship(back_populates="category")
+    flashcards: Mapped[List["Flashcard"]] = relationship(
+        init=False, back_populates="category"
+    )
 
 
-class WordType(Base):
+@table_registry.mapped_as_dataclass
+class WordType:
     __tablename__ = "word_type"
 
     id = mapped_column(Integer, primary_key=True)
@@ -35,7 +41,8 @@ class WordType(Base):
     flashcards: Mapped[List["Flashcard"]] = relationship(back_populates="word_type")
 
 
-class Flashcard(Base):
+@table_registry.mapped_as_dataclass
+class Flashcard:
     __tablename__ = "flashcard"
 
     id = mapped_column(Integer, primary_key=True)
